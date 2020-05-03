@@ -7,6 +7,7 @@ import { User } from './_models/user';
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
   currentUser: User;
+  title: string = 'Zound';
 
   constructor(
     private router: Router,
