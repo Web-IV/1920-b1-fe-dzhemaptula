@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { RegisterComponent } from './register/register.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -22,7 +23,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, RegisterComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
