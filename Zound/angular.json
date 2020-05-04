@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Zound"
+    }
+  },
+  "defaultProject": "Zound",
+  "cli": {
+    "analytics": "afb36971-44f3-4dc1-ae92-bf4d79d53fcf"
+  }
 }
