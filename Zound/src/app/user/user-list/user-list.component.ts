@@ -26,13 +26,7 @@ export class UserListComponent implements OnInit {
     private userService: UserService,
     private authenticationService: AuthService,
     private route: ActivatedRoute
-    
-
-
   ) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
     this.filterUser$
       .pipe(distinctUntilChanged(), debounceTime(100))
       .subscribe((val) => {
