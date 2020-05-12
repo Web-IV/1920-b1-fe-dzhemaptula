@@ -18,12 +18,17 @@
     <!-- <p class="card-text">
         About user
       </p> -->
-    <button
-      *ngIf="user.username != currentUser.username"
-      class="btn btn-success"
-    >
-      Send request
-    </button>
+    <div *ngIf="user.username != currentUser.username; else elsebutton">
+      <div *ngIf="true; else elsefriendadded">
+        <button (click)="sendFriendRequest(user)" class="btn btn-success">
+          Send request
+        </button>
+      </div>
+      <ng-template #elsefriendadded> </ng-template>
+    </div>
+    <ng-template #elsebutton>
+      ur gay logged in
+    </ng-template>
   </div>
 </div>
-<!-- (click)="sendFriendRequest()" -->
+<!--  -->

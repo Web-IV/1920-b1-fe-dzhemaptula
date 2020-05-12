@@ -1,5 +1,5 @@
 export interface UserJson {
-  userid: number;
+  userId: number;
   username: string;
   email: string;
   firstName: string;
@@ -10,7 +10,7 @@ export class User {
   token?: string;
 
   constructor(
-    private _id: number,
+    private _userId: number,
     private _username: string,
     private _email: string,
     private _firstName: string,
@@ -19,13 +19,25 @@ export class User {
 
   static fromJSON(json: UserJson): User {
     const user = new User(
-      json.userid,
+      json.userId,
       json.username,
       json.email,
       json.firstName,
       json.lastName
     );
     return user;
+  }
+
+  static toJSON(user: User): Object {
+    var jsonData = {
+      userId: user._userId,
+      email: user._email,
+      username: user._username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
+    console.log(jsonData);
+    return jsonData;
   }
 
   get username(): string {
@@ -43,7 +55,7 @@ export class User {
     return this._email;
   }
 
-  get id(): number {
-    return this._id;
+  get userId(): number {
+    return this._userId;
   }
 }

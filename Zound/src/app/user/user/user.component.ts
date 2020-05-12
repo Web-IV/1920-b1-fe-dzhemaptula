@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Md5 } from 'ts-md5/dist/md5';
+import { FriendService } from 'src/app/_services/friend.service';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +14,10 @@ export class UserComponent implements OnInit {
 
   @Input() public user: User;
 
-  constructor(authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private friendService: FriendService
+  ) {
     this.currentUser = authService.currentUserValue;
   }
 
@@ -27,5 +31,13 @@ export class UserComponent implements OnInit {
       '?d=identicon&s=' +
       size;
     return url;
+  }
+
+  sendFriendRequest(user: User) {
+    this.friendService.sendFriendRequest(user);
+  }
+
+  friendRequestSent(user): boolean {
+    return this.friendService.getSentUserFriendRequests;
   }
 }
