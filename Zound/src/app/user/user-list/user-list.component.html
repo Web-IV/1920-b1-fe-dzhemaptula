@@ -1,18 +1,23 @@
 <p>user-list works!</p>
-<div *ngIf="users$ | async as users">
+
+<div class="container">
+  <div *ngIf="users$ | async as users">
     <div
       fxLayout="row wrap"
       fxLayout.xs="column"
       fxLayoutGap="0.5%"
       fxLayoutAlign="start"
     >
-      <div
-        class="user"
-        *ngFor="let user of users"
-        fxFlex="0 0 calc(25%-0.5%)"
-        fxFlex.xs="100%"
-      >
-        <app-user [user]="user"></app-user>
+      <div class="row">
+        <div
+          class="col-xl-2 col-lg-3 col-md-4 col-sm-6"
+          *ngFor="let user of users"
+          fxFlex="0 0 calc(25%-0.5%)"
+          fxFlex.xs="100%"
+        >
+          <app-user [user]="user"></app-user>
+        </div>
       </div>
     </div>
+  </div>
 </div>

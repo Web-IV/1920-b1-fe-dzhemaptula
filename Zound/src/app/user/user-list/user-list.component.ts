@@ -30,6 +30,7 @@ export class UserListComponent implements OnInit {
     private authenticationService: AuthService,
     private route: ActivatedRoute
   ) {
+    // console.log('Current user: ' + this.currentUser);
     this.filterUser$
       .pipe(distinctUntilChanged(), debounceTime(100))
       .subscribe((val) => {

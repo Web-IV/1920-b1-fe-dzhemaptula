@@ -1,5 +1,29 @@
-<div class="card">
-    <a>{{user.username}}</a>
-    <a>{{user.firstName}} {{user.lastName}}</a>
-    <a>{{user.email}}</a>
+<!-- <div>
+  <a>Current user: {{ currentUser.username }}</a>
+  <a>{{ user.username }}</a>
+  <a>{{ user.firstName }} {{ user.lastName }}</a>
+  <a>{{ user.email }}</a>
+  <button
+    *ngIf="user.username != currentUser.username"
+    type="button"
+    class="btn btn-success"
+  >
+    Add friend
+  </button>
+</div> -->
+<div class="card row" style="width: 10rem;">
+  <img class="card-img-top" src="{{ avatar(128) }}" alt="Card image cap" />
+  <div class="card-body">
+    <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+    <!-- <p class="card-text">
+        About user
+      </p> -->
+    <button
+      *ngIf="user.username != currentUser.username"
+      class="btn btn-success"
+    >
+      Send request
+    </button>
+  </div>
 </div>
+<!-- (click)="sendFriendRequest()" -->

@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
+  private tokenSubject: BehaviorSubject<string>;
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser'))
-    );
+    var userJson: any = JSON.parse(localStorage.getItem('currentUser'));
+    var tokenJson: any = JSON.parse(localStorage.getItem('token'));
+    this.currentUserSubject = new BehaviorSubject<User>(userJson);
+    this.tokenSubject = new BehaviorSubject<string>(tokenJson);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -28,8 +30,10 @@ export class AuthService {
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          localStorage.setItem('token', JSON.stringify(user.token));
+          localStorage.setItem('currentUser', JSON.stringify(user.userdto));
+          this.currentUserSubject.next(user.userdto);
+          this.tokenSubject.next(user.token);
           return user;
         })
       );
@@ -47,8 +51,10 @@ export class AuthService {
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          localStorage.setItem('token', JSON.stringify(user.token));
+          localStorage.setItem('currentUser', JSON.stringify(user.userdto));
+          this.currentUserSubject.next(user.userdto);
+          this.tokenSubject.next(user.token);
           return user;
         })
       );
@@ -56,6 +62,10 @@ export class AuthService {
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
+  }
+
+  public get tokenValue(): string {
+    return this.tokenSubject.value;
   }
   logout() {
     // remove user from local storage to log user out
