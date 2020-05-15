@@ -11,6 +11,7 @@
     Add friend
   </button>
 </div> -->
+
 <div class="card row" style="width: 10rem;">
   <img class="card-img-top" src="{{ avatar(128) }}" alt="Card image cap" />
   <div class="card-body">
@@ -47,6 +48,12 @@
               class="btn btn-success"
             >
               Accept request
+            </button>
+            <button
+              (click)="cancelFriendRequest(friend.token)"
+              class="btn btn-danger"
+            >
+              Decline request
             </button>
           </div>
           <ng-template #friends><p>User is your friend</p> </ng-template>

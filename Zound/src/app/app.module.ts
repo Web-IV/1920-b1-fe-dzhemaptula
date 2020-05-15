@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user/user.component';
 import { PostComponent } from './post/post.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -26,7 +27,15 @@ import { UserListComponent } from './user/user-list/user-list.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  declarations: [AppComponent, LoginComponent, HomeComponent, RegisterComponent, UserComponent, PostComponent, UserListComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    RegisterComponent,
+    UserComponent,
+    PostComponent,
+    UserListComponent,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

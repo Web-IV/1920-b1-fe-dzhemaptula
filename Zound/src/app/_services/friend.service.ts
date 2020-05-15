@@ -91,8 +91,8 @@ export class FriendService {
       .pipe(
         catchError(this.handleError),
         map(UserFriend.fromJSON),
-        tap((request: UserFriend) => {
-          this._userFriends = [...this._userFriends, request];
+        tap((friend: UserFriend) => {
+          this._userFriends = [...this._userFriends, friend];
           this._userFriends$.next(this._userFriends);
         })
       )
