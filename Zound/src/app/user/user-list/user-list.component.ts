@@ -11,7 +11,11 @@ import {
   debounceTime,
   catchError,
   switchMap,
+  tap,
 } from 'rxjs/operators';
+import { UserFriendRequest } from 'src/app/_models/userfriendrequest';
+import { FriendService } from 'src/app/_services/friend.service';
+import { UserFriend } from 'src/app/_models/userfriend';
 
 @Component({
   selector: 'app-user-list',
@@ -21,14 +25,22 @@ import {
 export class UserListComponent implements OnInit {
   public filterUserName: string = '';
   public filterUser$ = new Subject<string>();
+
   private _fetchUsers$: Observable<User[]>;
   public errorMessage: string = '';
+
+  private sentRequests: UserFriendRequest[];
+  private receivedRequests: UserFriendRequest[];
+  private userFriends: UserFriend[];
+
+  private currentUser: User;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private friendService: FriendService
   ) {
     // console.log('Current user: ' + this.currentUser);
     this.filterUser$
@@ -58,8 +70,23 @@ export class UserListComponent implements OnInit {
           return EMPTY;
         })
       );
+
+    this.currentUser = authenticationService.currentUserValue;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.friendService.allSentRequests$.subscribe((x) => {
+      // console.log(x);
+      this.sentRequests = x;
+    });
+    this.friendService.allReceivedRequests$.subscribe((x) => {
+      console.log(x);
+      this.receivedRequests = x;
+    });
+    this.friendService.allFriends$.subscribe((x) => {
+      console.log(x);
+      this.userFriends = x;
+    });
+  }
 
   applyFilter(filter: string) {
     this.filterUserName = filter;
@@ -67,5 +94,43 @@ export class UserListComponent implements OnInit {
 
   get users$(): Observable<User[]> {
     return this._fetchUsers$;
+  }
+
+  // props(user: User): any {
+  //   return { user: user, friendStatus: this.friendRequestSent(user) };
+  // }
+
+  friendRequestSent(user: User): { status: number; token: string } {
+    var res: any = { status: 0, token: '' };
+    var found: boolean = false;
+    if (user.userId == this.currentUser.userId) {
+      return { status: -1, token: '' };
+      found = true;
+    }
+    if (!found) {
+      this.sentRequests.forEach((element) => {
+        if (element.requestedToId == user.userId) {
+          res = { status: 1, token: element.token };
+          found = true;
+        }
+      });
+      if (!found) {
+        this.receivedRequests.forEach((element) => {
+          if (element.requestedFromId == user.userId) {
+            res = { status: 2, token: element.token };
+            found = true;
+          }
+        });
+        if (!found) {
+          this.userFriends.forEach((element) => {
+            if (element.friendId == user.userId) {
+              res = { status: 3, token: '' };
+            }
+          });
+        }
+      }
+    }
+
+    return res;
   }
 }

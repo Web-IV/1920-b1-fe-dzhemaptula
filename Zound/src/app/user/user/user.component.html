@@ -18,16 +18,43 @@
     <!-- <p class="card-text">
         About user
       </p> -->
+
+    <!-- Friend status:
+        0 no relation
+        1 request sent
+        2 request received
+        3 friends
+       -->
     <div *ngIf="user.username != currentUser.username; else elsebutton">
-      <div *ngIf="true; else elsefriendadded">
-        <button (click)="sendFriendRequest(user)" class="btn btn-success">
+      <div *ngIf="friend.status == 0; else requestSent">
+        <button (click)="sendFriendRequest(user)" class="btn btn-primary">
           Send request
         </button>
       </div>
-      <ng-template #elsefriendadded> </ng-template>
+      <ng-template #requestSent>
+        <div *ngIf="friend.status == 1; else requestReceived">
+          <button
+            (click)="cancelFriendRequest(friend.token)"
+            class="btn btn-danger"
+          >
+            Cancel request
+          </button>
+        </div>
+        <ng-template #requestReceived>
+          <div *ngIf="friend.status == 2; else friends">
+            <button
+              (click)="acceptFriendRequest(friend.token)"
+              class="btn btn-success"
+            >
+              Accept request
+            </button>
+          </div>
+          <ng-template #friends><p>User is your friend</p> </ng-template>
+        </ng-template>
+      </ng-template>
     </div>
     <ng-template #elsebutton>
-      ur gay logged in
+      logged in
     </ng-template>
   </div>
 </div>
