@@ -92,6 +92,7 @@ export class FriendService {
         catchError(this.handleError),
         map(UserFriend.fromJSON),
         tap((friend: UserFriend) => {
+          //TODO: refresh the receivedRequests too
           this._userFriends = [...this._userFriends, friend];
           this._userFriends$.next(this._userFriends);
         })
