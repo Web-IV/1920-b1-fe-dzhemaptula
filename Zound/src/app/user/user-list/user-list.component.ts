@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User } from '../../_models/user';
+import { User } from 'src/app/_models/user';
 
-import { AuthService } from '../../_services/auth.service';
-import { UserService } from '../../_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
 import { Observable, Subject, EMPTY } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -13,6 +13,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+
 import { UserFriendRequest } from 'src/app/_models/userfriendrequest';
 import { FriendService } from 'src/app/_services/friend.service';
 import { UserFriend } from 'src/app/_models/userfriend';
@@ -79,7 +80,7 @@ export class UserListComponent implements OnInit {
       this.sentRequests = x;
     });
     this.friendService.allReceivedRequests$.subscribe((x) => {
-      console.log(x);
+      // console.log(x);
       this.receivedRequests = x;
     });
     this.friendService.allFriends$.subscribe((x) => {
@@ -132,7 +133,6 @@ export class UserListComponent implements OnInit {
         });
       }
     }
-
     return res;
   }
 }
