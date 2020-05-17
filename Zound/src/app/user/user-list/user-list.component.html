@@ -1,20 +1,29 @@
-<div class="container">
+<!-- <div class="container">
   <div *ngIf="users$ | async as users">
-    <div
-      fxLayout="row wrap"
-      fxLayout.xs="column"
-      fxLayoutGap="0.5%"
-      fxLayoutAlign="start"
-    >
-      <div class="row">
-        <div
-          class="col-xl-2 col-lg-3 col-md-4 col-sm-6"
-          *ngFor="let user of users"
-          fxFlex="0 0 calc(25%-0.5%)"
-          fxFlex.xs="100%"
-        >
-          <app-user [user]="user" [friend]="friendStatus(user)"></app-user>
-        </div>
+    <div class="row">
+      <div
+        class="col-xl-2 col-lg-3 col-md-4 col-sm-6"
+        *ngFor="let user of users"
+        fxFlex="0 0 calc(25%-0.5%)"
+        fxFlex.xs="100%"
+      >
+        <app-user [user]="user" [friend]="friendStatus(user)"></app-user>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <mat-card class="search-card">
+    <mat-form-field appearance="legacy">
+      <mat-label class="label-style">Search</mat-label>
+      <input matInput placeholder="User" />
+    </mat-form-field>
+  </mat-card>
+  <div class="row" *ngIf="users$ | async as users">
+    <div *ngFor="let user of users">
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <app-user [user]="user" [friend]="friendStatus(user)"></app-user>
       </div>
     </div>
   </div>
