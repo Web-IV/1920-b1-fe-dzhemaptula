@@ -21,6 +21,11 @@
   src: url("../../../fonts/poppins/Poppins-SemiBold.ttf");
 }
 
+@font-face {
+  font-family: Arkhip;
+  src: url("../../../fonts/arkhip/Arkhip_font.ttf");
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
@@ -280,7 +285,7 @@ iframe {
 .login100-form-title {
   display: block;
   width: 100%;
-  font-family: Poppins-Bold;
+  font-family: Arkhip;
   font-size: 39px;
   color: #333333;
   line-height: 1.2;
@@ -293,8 +298,7 @@ iframe {
 .wrap-input100 {
   width: 100%;
   position: relative;
-  border-bottom: 2px solid #dbdbdb;
-  margin-bottom: 45px;
+  margin-bottom: 20px;
 }
 
 .label-input100 {
