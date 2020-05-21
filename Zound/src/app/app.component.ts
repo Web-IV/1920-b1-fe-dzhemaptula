@@ -32,4 +32,13 @@ export class AppComponent {
       this.router.url.match(/login.*/) || this.router.url.match(/register.*/)
     );
   }
+  routerUsers() {
+    return this.router.url.match(/users.*/);
+  }
+  routerHome() {
+    return this.router.url.match(/home.*/);
+  }
+  routerTimeline() {
+    return this.router.url.match(/timeline.*/);
+  }
 }

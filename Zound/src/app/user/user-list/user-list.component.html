@@ -21,8 +21,8 @@
     </mat-form-field>
   </mat-card>
   <div class="row" *ngIf="users$ | async as users">
-    <div *ngFor="let user of users">
-      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" *ngFor="let user of users">
+      <div>
         <app-user [user]="user" [friend]="friendStatus(user)"></app-user>
       </div>
     </div>

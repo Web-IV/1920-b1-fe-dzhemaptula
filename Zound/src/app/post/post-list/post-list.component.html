@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-card
+    style="width: 100%; padding-left: 20%; padding-right: 20%;"
+    class="search-card"
+  >
+    <mat-form-field style="width: 100%;" appearance="legacy">
+      <mat-label class="label-style">Make a post</mat-label>
+      <textarea style="width: 100%;" matInput placeholder="Post"></textarea>
+    </mat-form-field>
+  </mat-card>
+  <div class="row" *ngIf="posts$ as posts">
+    <div class="col-12" *ngFor="let post of posts">
+      <div>
+        <app-post [post]="post"></app-post>
+      </div>
+    </div>
+  </div>
+</div>

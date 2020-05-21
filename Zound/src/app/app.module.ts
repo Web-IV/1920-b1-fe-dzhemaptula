@@ -13,9 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { RegisterComponent } from './register/register.component';
-import { PostComponent } from './post/post.component';
 import { UserModule } from './user/user.module';
 import { MaterialModule } from './material/material.module';
+import { PostComponent } from './post/post/post.component';
+import { PostListComponent } from './post/post-list/post-list.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { MaterialModule } from './material/material.module';
     HomeComponent,
     RegisterComponent,
     PostComponent,
+    PostListComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

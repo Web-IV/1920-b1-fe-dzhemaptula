@@ -25,6 +25,14 @@
   z-index: 500;
 }
 
+.selected-nav {
+  background-color: styles.$inverteddarkcolor;
+}
+
+.select-hover:hover {
+  background-color: styles.$inverteddarkcolor;
+}
+
 .logo {
   position: absolute;
   height: 100%;
@@ -39,6 +47,7 @@
 }
 
 .navstyle {
+  padding: 0;
   background-color: styles.$darkcolor;
 }
 
@@ -48,7 +57,7 @@
   font-size: 24px;
 }
 
-.navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
+.navbar-icon- top .navbar-nav .nav-link > .fa > .badge {
   font-size: 0.75rem;
   position: absolute;
   right: 0;
