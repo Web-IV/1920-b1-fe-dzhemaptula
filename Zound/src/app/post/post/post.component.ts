@@ -23,4 +23,7 @@ export class PostComponent implements OnInit {
       size;
     return url;
   }
+  greenText() {
+    return this.post.text.startsWith('>');
+  }
 }

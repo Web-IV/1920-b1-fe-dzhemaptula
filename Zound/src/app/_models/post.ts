@@ -11,6 +11,7 @@ export interface PostJson {
 export class Post {
   constructor(
     private _postId: number,
+    private _userId: number,
     private _user: User,
     private _title: string,
     private _text: string,
@@ -21,6 +22,7 @@ export class Post {
     var user = User.fromJSON(json.userDto);
     const post = new Post(
       json.postId,
+      json.userDto.userId,
       user,
       json.title,
       json.text,
@@ -31,8 +33,7 @@ export class Post {
 
   static toJSON(post: Post): Object {
     var jsonData = {
-      postId: post._postId,
-      user: User.toJSON(post._user),
+      userId: post._userId,
       title: post._title,
       text: post._text,
       datePosted: post._datePosted,

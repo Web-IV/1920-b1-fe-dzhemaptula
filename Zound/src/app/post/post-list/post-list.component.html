@@ -3,10 +3,53 @@
     style="width: 100%; padding-left: 20%; padding-right: 20%;"
     class="search-card"
   >
-    <mat-form-field style="width: 100%;" appearance="legacy">
-      <mat-label class="label-style">Make a post</mat-label>
-      <textarea style="width: 100%;" matInput placeholder="Post"></textarea>
-    </mat-form-field>
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <mat-form-field style="width: 100%;" appearance="legacy">
+        <mat-label for="title" class="label-style">Title</mat-label>
+        <input
+          formControlName="title"
+          style="width: 100%;"
+          matInput
+          placeholder="Title"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+        />
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">
+            Title is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field style="width: 100%;" appearance="fill">
+        <mat-label for="text" class="label-style">Make a post</mat-label>
+        <textarea
+          style="width: 100%; height: 5rem;"
+          formControlName="text"
+          matInput
+          placeholder="Post"
+          [ngClass]="{ 'is-invalid': submitted && f.text.errors }"
+        ></textarea>
+        <div *ngIf="submitted && f.text.errors" class="invalid-feedback">
+          <div *ngIf="f.text.errors.required">
+            Text is required
+          </div>
+        </div>
+      </mat-form-field>
+      <button
+        class="postbutton"
+        mat-raised-button
+        color="accent"
+        [disabled]="loading"
+      >
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm mr-1"
+        ></span>
+        Create post
+      </button>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+        {{ error }}
+      </div>
+    </form>
   </mat-card>
   <div class="row" *ngIf="posts$ as posts">
     <div class="col-12" *ngFor="let post of posts">

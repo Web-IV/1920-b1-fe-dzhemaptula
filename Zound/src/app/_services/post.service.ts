@@ -9,6 +9,19 @@ import { shareReplay, tap, catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class PostService {
+  addPost(post: Post) {
+    return this.http
+      .post(`${environment.apiUrl}/posts/add`, Post.toJSON(post))
+      .pipe(
+        catchError(this.handleError),
+        map(Post.fromJSON),
+        tap((post: Post) => {
+          this._friendPosts = [post, ...this._friendPosts];
+          this._friendPosts$.next(this._friendPosts);
+        })
+      )
+      .subscribe();
+  }
   private _friendPosts$ = new BehaviorSubject<Post[]>([]);
   private _friendPosts: Post[];
 

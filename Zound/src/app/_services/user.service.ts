@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { Observable, throwError } from 'rxjs';
 import { shareReplay, catchError, map, tap } from 'rxjs/operators';
+import { Md5 } from 'ts-md5';
 
 @Injectable({
   providedIn: 'root',
