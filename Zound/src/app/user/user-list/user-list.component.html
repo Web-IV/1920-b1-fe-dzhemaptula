@@ -17,14 +17,24 @@
   <mat-card class="search-card">
     <mat-form-field appearance="legacy">
       <mat-label class="label-style">Search</mat-label>
-      <input matInput placeholder="User" />
+      <input [(ngModel)]="searchTerm" matInput placeholder="User" />
     </mat-form-field>
   </mat-card>
-  <div class="row" *ngIf="users$ | async as users">
-    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" *ngFor="let user of users">
+  <div class="row" *ngIf="users$ | async as users; else loadingOrError">
+    <div
+      style="margin: 0px; padding: 0px;"
+      class="col-xl-2 col-lg-3 col-md-4 col-sm-6"
+      *ngFor="let user of users | userFilter: searchTerm"
+    >
       <div>
         <app-user [user]="user" [friend]="friendStatus(user)"></app-user>
       </div>
     </div>
   </div>
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
 </div>

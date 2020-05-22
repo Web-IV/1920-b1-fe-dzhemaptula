@@ -29,6 +29,7 @@ export class UserListComponent implements OnInit {
 
   private _fetchUsers$: Observable<User[]>;
   public errorMessage: string = '';
+  searchTerm: string = '';
 
   private sentRequests: UserFriendRequest[];
   private receivedRequests: UserFriendRequest[];
@@ -48,7 +49,7 @@ export class UserListComponent implements OnInit {
       .pipe(distinctUntilChanged(), debounceTime(100))
       .subscribe((val) => {
         const params = val ? { queryParams: { filter: val } } : undefined;
-        this.router.navigate(['/user/list'], params);
+        this.router.navigate(['/users'], params);
       });
 
     this._fetchUsers$ = this.route.queryParams

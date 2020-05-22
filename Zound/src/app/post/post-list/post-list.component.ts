@@ -91,7 +91,4 @@ export class PostListComponent implements OnInit {
     }
   }
 
-  keyPress(event: KeyboardEvent) {
-    console.log(event.charCode);
-  }
 }
