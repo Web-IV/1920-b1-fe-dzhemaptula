@@ -9,6 +9,8 @@ Backend: https://github.com/Web-IV/1920-b1-be-dzhemaptula
 Website is running on: www.dzhem.ysebie.com
 Find the RESTful API swagger on: www.dzhem.ysebie.com/swagger
 
+![](Zound/src/assets/zound.gif)
+
 Use the following account for login:
 
 - Username: web4
